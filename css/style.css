@@ -1,0 +1,605 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'メイリオ', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #101e40;
+  padding: 0;
+}
+
+/* BOX3とBOX4を横並びにする */
+.boxA::after {content: ""; display: block; clear: both;}
+
+/* BOX3・BOX4の横並び */
+.boxA {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.box3 {
+    float: none;
+    width: 70%;
+    min-width: 0;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.box4 {
+    float: none;
+    width: 30%;
+    min-width: 0;
+    height: auto;
+    box-sizing: border-box;
+}
+
+/*rail explorer*/
+.site h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.site h2 {
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/*navigation menu*/
+
+/* Google Fonts：英字用フォント */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+
+/* ナビゲーション全体 */
+.box2 {
+    background-color: #f5f3ee;
+    padding: 16px 20px;
+    border-bottom: 1px solid #dedbd3;
+}
+
+/* ボタンを横一列に配置 */
+.menu ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 四角いボタン */
+.menu-button {
+    display: block;
+    min-width: 110px;
+    padding: 13px 22px;
+
+    background-color: #172744;
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-decoration: none;
+
+    border: 1px solid #172744;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
+}
+
+/* マウスを乗せたとき */
+.menu-button:hover {
+    background-color: #F2E2B8;
+    border-color: #F2E2B8;
+    color: #172744;
+}
+
+/* スマートフォン対応 */
+@media (max-width: 520px) {
+    .box2 {
+        padding: 12px;
+    }
+
+    .menu ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .menu-button {
+        min-width: 0;
+        padding: 12px 6px;
+        font-size: 11px;
+    }
+}
+
+
+.menu li {
+  display: block;
+  padding: 10px;
+  color: #000000;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.menu li:hover {
+  background-color:#101e40;
+  color: #fff;
+  cursor: pointer;
+}
+
+.menu ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.menu li {float: left; width: auto;}
+
+
+/* サイトヘッダー */
+.box1 {
+    background-color: #101e40;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+/* ロゴ画像 */
+.site-logo {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* ロゴのリンク */
+.site a {
+    display: block;
+}
+
+/* ===== Latest Journal：記事一覧 ===== */
+
+.box5 {
+    background-color: #f5f3ee;
+    padding: 48px 6%;
+    color: #172744;
+}
+
+.box5 h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #172744;
+}
+
+/* 記事カードを並べる */
+#article-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* 各記事カード */
+.article-card {
+    background-color: #ffffff;
+    padding: 24px;
+    border: 1px solid #e2ded5;
+    border-top: 4px solid #172744;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* マウスを乗せたとき */
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(23, 39, 68, 0.10);
+}
+
+/* 国名 */
+.article-country {
+    color: #a64b38;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+
+/* 記事タイトル */
+.article-card h3 {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.article-card h3 a {
+    color: #172744;
+    text-decoration: none;
+}
+
+.article-card h3 a:hover {
+    color: #F2E2B8;
+}
+
+/* 日付 */
+.article-date {
+    color: #888888;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+/* 記事の説明 */
+.article-card p:last-child {
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 0;
+}
+
+/* タブレット */
+@media (max-width: 900px) {
+    #article-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+    .box5 {
+        padding: 32px 18px;
+    }
+
+    .box5 h2 {
+        font-size: 20px;
+    }
+
+    #article-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .article-card {
+        padding: 20px;
+    }
+}
+
+/* サイドメニュー */
+.sidemenu ul{ margin: 0; padding: 0; list-style: none; }
+.sidemenu li a{ display: block; padding: 10px; color: #000000; font-size: 14px; text-decoration: none; }
+.sidemenu li a:hover{ background-color:#101e40; color: #fff; cursor: pointer; }
+
+
+
+/* Google Fonts：英字見出し用 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+
+/* サイドバー */
+.box4 {
+    box-sizing: border-box;
+    width: 30%;
+    padding: 32px 24px;
+    background-color: #f5f3ee;
+    color: #172744;
+}
+
+/* おすすめ記事の見出し */
+.sidemenu h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #172744;
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #c9c4b8;
+    position: relative;
+}
+
+/* 見出しの下に赤茶色のアクセント */
+.sidemenu h3::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 48px;
+    height: 3px;
+    background-color: #F2E2B8;
+}
+
+/* リスト */
+.sidemenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidemenu li {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #e2ded5;
+}
+
+/* リンク */
+.sidemenu li a {
+    display: block;
+    padding: 16px 8px;
+    color: #34435c;
+    font-size: 13px;
+    line-height: 1.8;
+    text-decoration: none;
+    transition: color 0.2s ease,
+                padding-left 0.2s ease;
+}
+
+/* マウスを乗せたとき */
+.sidemenu li a:hover {
+    color: #F2E2B8;
+    padding-left: 14px;
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+    .box4 {
+        width: 100%;
+        padding: 28px 20px;
+    }
+}
+
+
+/* ===== サイドバー共通 ===== */
+
+.osusume,
+.ranking {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 36px;
+}
+
+.osusume h3,
+.ranking h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #172744;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d8d2c6;
+    position: relative;
+}
+
+.osusume h3::after,
+.ranking h3::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 42px;
+    height: 3px;
+    background-color: #A64B38;
+}
+
+.osusume ul,
+.ranking ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== おすすめ記事：写真にタイトルを重ねる ===== */
+
+.osusume li {
+    margin-bottom: 14px;
+}
+
+.osusume li a {
+    display: block;
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    background-color: #172744;
+    text-decoration: none;
+}
+
+.osusume li img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+/* 写真の下部を暗くして文字を読みやすく */
+.osusume li a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(10, 20, 38, 0.9) 0%,
+        rgba(10, 20, 38, 0.15) 65%,
+        transparent 100%
+    );
+}
+
+.osusume li span {
+    position: absolute;
+    z-index: 1;
+    left: 16px;
+    right: 12px;
+    bottom: 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.osusume li a:hover img {
+    transform: scale(1.06);
+}
+
+.osusume li a:hover span {
+    color: #F2E2B8;
+}
+
+/* ===== 人気記事：左に写真、右にタイトル ===== */
+
+.ranking li {
+    border-bottom: 1px solid #e2ded5;
+}
+
+.ranking li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    color: #172744;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7;
+    transition: color 0.2s ease;
+}
+
+.ranking li img {
+    flex: 0 0 88px;
+    width: 88px;
+    height: 66px;
+    object-fit: cover;
+    background-color: #e2ded5;
+}
+
+.ranking li span {
+    flex: 1;
+}
+
+.ranking li a:hover {
+    color: #A64B38;
+}
+
+.ranking li a:hover img {
+    outline: 2px solid #F2E2B8;
+    outline-offset: -2px;
+}
+
+/* ===== スマートフォン ===== */
+
+@media (max-width: 600px) {
+    .osusume li a {
+        height: 180px;
+    }
+
+    .ranking li img {
+        flex-basis: 100px;
+        width: 100px;
+        height: 72px;
+    }
+}
+
+
+/* ===== BOX3：メインビジュアル ===== */
+
+.box3 {
+    width: 70%;
+    min-width: 0;
+    box-sizing: border-box;
+    background-color: #d3d3d3;
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 480px;
+    padding: 48px;
+    box-sizing: border-box;
+
+    /* 写真を設定するまではネイビーで表示 */
+    background-color: #172744;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(15, 29, 53, 0.92),
+            rgba(15, 29, 53, 0.25)
+        ),
+        url("../images/hero-train.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+}
+
+.hero-content {
+    max-width: 540px;
+}
+
+.hero-label {
+    color: #F2E2B8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
+}
+
+.hero h2 {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.5px;
+    margin: 0 0 20px;
+}
+
+.hero-description {
+    color: #e5e8ee;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    display: inline-block;
+    padding: 13px 22px;
+    border: 1px solid #F2E2B8;
+    color: #F2E2B8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.hero-button:hover {
+    background-color: #F2E2B8;
+    color: #172744;
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+    .box3 {
+        width: 100%;
+    }
+
+    .hero {
+        min-height: 380px;
+        padding: 28px;
+    }
+}
+
+/*copyright*/
+.copyright p {margin:0;
+              color: #F2E2B8;
+              font-size: :14px;
+}
