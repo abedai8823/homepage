@@ -11,6 +11,7 @@ import {
   getDocs,
   doc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
   query,
   orderBy
@@ -221,8 +222,37 @@ async function loadArticles() {
       editButton.addEventListener("click", () => {
         editArticle(documentSnapshot.id, article);
       });
+const deleteButton = document.createElement("button");
+deleteButton.type = "button";
+deleteButton.textContent = "この記事を削除";
+deleteButton.style.marginLeft = "8px";
+deleteButton.style.color = "#c62828";
 
-      item.append(title, details, editButton);
+deleteButton.addEventListener("click", async () => {
+  const articleTitle = article.title || "無題の記事";
+
+  if (!confirm(`「${articleTitle}」を本当に削除しますか？\nこの操作は取り消せません。`)) {
+    return;
+  }
+
+  deleteButton.disabled = true;
+
+  try {
+    await deleteDoc(doc(db, "articles", documentSnapshot.id));
+
+    if (editingArticleId === documentSnapshot.id) {
+      resetEditor();
+    }
+
+    setMessage(`「${articleTitle}」を削除しました。`);
+    await loadArticles();
+  } catch (error) {
+    console.error("記事削除エラー:", error);
+    setMessage("削除に失敗しました。Firestoreのセキュリティルールを確認してください。");
+    deleteButton.disabled = false;
+  }
+});
+      item.append(title, details, editButton, deleteButton);
       item.style.cssText =
         "padding:14px;margin:12px 0;border:1px solid #ddd;border-radius:6px;";
 
