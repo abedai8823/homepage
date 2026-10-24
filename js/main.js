@@ -160,3 +160,9 @@ function shareOnLINE() {
 
   window.open(shareUrl, "_blank", "noopener,noreferrer");
 }
+
+// type="module" のスクリプト内の関数は、そのままだと
+// HTMLのonclick="shareOnX()"から呼べないため、windowに登録する
+window.shareOnX = shareOnX;
+window.shareOnFacebook = shareOnFacebook;
+window.shareOnLINE = shareOnLINE;
