@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rail explorer</title>
   <link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
 <body>
 
     <main>
+
 
 <header class="box1">
     <div class="site">
@@ -20,19 +24,26 @@
             >
         </a>
     </div>
+
+    <a href="login.html" class="login-button">
+        管理者ログイン
+    </a>
+
 </header>
+
 
 
 
 <nav class="box2 menu">
     <ul>
-        <li><a class="menu-button" href="#">HOME</a></li>
-        <li><a class="menu-button" href="#">JAPAN</a></li>
-        <li><a class="menu-button" href="#">ASIA</a></li>
-        <li><a class="menu-button" href="#">AFRICA</a></li>
-        <li><a class="menu-button" href="#">EUROPE</a></li>
+        <li><a class="menu-button" href="#home">HOME</a></li>
+        <li><a class="menu-button" href="#japan">JAPAN</a></li>
+        <li><a class="menu-button" href="#asia">ASIA</a></li>
+        <li><a class="menu-button" href="#africa">AFRICA</a></li>
+        <li><a class="menu-button" href="#europe">EUROPE</a></li>
     </ul>
 </nav>
+
 
 
 
@@ -46,84 +57,63 @@
     <article id="latest-article">
         <!-- JavaScriptで最新記事の全文を表示 -->
     </article>
+
+
+<div class="share">
+  <ul>
+    <li>
+      <a href="#" onclick="shareOnX(); return false;"
+         class="share-button share-X" aria-label="Xで共有">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a href="#" onclick="shareOnFacebook(); return false;"
+         class="share-button share-fb" aria-label="Facebookで共有">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a href="#" onclick="shareOnLINE(); return false;"
+         class="share-button share-line" aria-label="LINEで共有">
+        <i class="fa-brands fa-line"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
 </div>
 
 
 
 
 <div class="box4">
-    <aside class="sidemenu">
-        <h3>Pick up</h3>
-        <ul>
-            <li><a href="#">スリランカの鉄道旅</a></li>
-            <li><a href="#">タンザニアの鉄道</a></li>
-            <li><a href="#">ヨーロッパ鉄道紀行</a></li>
-            <li><a href="#">世界の駅を訪ねて</a></li>
-        </ul>
-    </aside>
+
+<aside class="sidemenu">
+    <h3>Pick up</h3>
+    <ul id="pickup-list">
+        <li>記事を読み込んでいます...</li>
+    </ul>
+</aside>
+
 
  
+
 <aside class="osusume">
     <h3>Recommended Articles</h3>
-    <ul>
-        <li>
-            <a href="#">
-                <img src="images/sri-lanka.jpg" alt="スリランカの鉄道">
-                <span>スリランカの鉄道旅</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/tanzania.jpg" alt="タンザニアの鉄道">
-                <span>タンザニアの鉄道</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/europe.jpg" alt="ヨーロッパの鉄道">
-                <span>ヨーロッパ鉄道紀行</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/station.jpg" alt="世界の駅">
-                <span>世界の駅を訪ねて</span>
-            </a>
-        </li>
+    <ul id="recommended-list">
+        <li>記事を読み込んでいます...</li>
     </ul>
 </aside>
 
 <aside class="ranking">
     <h3>Popular Articles</h3>
-    <ul>
-        <li>
-            <a href="#">
-                <img src="images/sri-lanka.jpg" alt="スリランカの鉄道">
-                <span>スリランカの鉄道旅</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/tanzania.jpg" alt="タンザニアの鉄道">
-                <span>タンザニアの鉄道</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/europe.jpg" alt="ヨーロッパの鉄道">
-                <span>ヨーロッパ鉄道紀行</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img src="images/station.jpg" alt="世界の駅">
-                <span>世界の駅を訪ねて</span>
-            </a>
-        </li>
+    <ul id="popular-list">
+        <li>記事を読み込んでいます...</li>
     </ul>
 </aside>
 
-</div>
 
 </div>
 
@@ -145,5 +135,6 @@
 
    <script src="js/main.js"></script>
 
-    </body>
+<script type="module" src="js/firebase.js"></script>
+ </body>
 </html>

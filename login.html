@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者ログイン | rail explorer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #172744;
+      color: #172744;
+      font-family: sans-serif;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      padding: 36px 28px;
+      background: #F5F3ED;
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      margin-bottom: 28px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px;
+      border: none;
+      border-radius: 6px;
+      background: #A64B38;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #message {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 22px;
+      text-align: center;
+      color: #172744;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="login-card">
+    <h1>rail explorer</h1>
+    <p class="subtitle">管理者ログイン</p>
+
+    <form id="login-form">
+      <label for="email">メールアドレス</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        required
+      >
+
+      <label for="password">パスワード</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button id="login-button" type="submit">
+        ログイン
+      </button>
+    </form>
+
+    <p id="message" role="status"></p>
+
+    <a class="back-link" href="index.html">
+      ← サイトトップへ戻る
+    </a>
+  </main>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

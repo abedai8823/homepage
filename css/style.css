@@ -1,59 +1,97 @@
 @charset "UTF-8";
 
+/* Google Fonts：英字用フォント（@importは先頭に置く必要がある） */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+
+/* ===== 基本設定 ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'メイリオ', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #101e40;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #101e40;
+    font-family: 'メイリオ', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* BOX3とBOX4を横並びにする */
-.boxA::after {content: ""; display: block; clear: both;}
-
-/* BOX3・BOX4の横並び */
-.boxA {
-    display: flex;
-    align-items: flex-start;
+main {
     width: 100%;
-}
-
-.box3 {
-    float: none;
-    width: 70%;
-    min-width: 0;
-    height: auto;
-    box-sizing: border-box;
-}
-
-.box4 {
-    float: none;
-    width: 30%;
-    min-width: 0;
-    height: auto;
-    box-sizing: border-box;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 /*rail explorer*/
 .site h1 {
-  font-size: 2.5rem;
-  color: #fff;
-  text-align: center;
-  margin-top: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .site h2 {
-  font-size: 1.5rem;
-  color: #fff;
-  text-align: center;
-  margin-top: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
 }
 
-/*navigation menu*/
+/* ロゴのリンク */
+.site a {
+    display: block;
+}
 
-/* Google Fonts：英字用フォント */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+/* ===== サイトヘッダー ===== */
+
+.box1 {
+    position: relative;
+    background-color: #101e40;
+    padding: 24px 220px;
+    text-align: center;
+}
+
+/* ロゴ画像 */
+.site-logo {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* 管理者ログインボタン */
+.login-button {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    z-index: 10;
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #172744;
+    color: #F2E2B8;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #F2E2B8;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+    background-color: #A64B38;
+    color: #FFFFFF;
+}
+
+/* ===== ナビゲーションメニュー ===== */
 
 /* ナビゲーション全体 */
 .box2 {
+    width: 100%;
     background-color: #f5f3ee;
     padding: 16px 20px;
     border-bottom: 1px solid #dedbd3;
@@ -67,6 +105,20 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.menu li {
+    display: block;
+    padding: 0;
+    color: #000000;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.menu li:hover {
+    background-color: #101e40;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* 四角いボタン */
@@ -116,180 +168,151 @@ body {
     }
 }
 
+/* ===== メインレイアウト（BOX3 + BOX4） ===== */
 
-.menu li {
-  display: block;
-  padding: 10px;
-  color: #000000;
-  font-size: 14px;
-  text-decoration: none;
+.boxA {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+    align-items: start;
+    gap: 0;
+    width: 100%;
 }
 
-.menu li:hover {
-  background-color:#101e40;
-  color: #fff;
-  cursor: pointer;
+.box3 {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    background-color: #f5f3ee;
 }
 
-.menu ul::after {
-  content: "";
-  display: block;
-  clear: both;
+.box4 {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 28px 24px;
+    background-color: #f5f3ee;
+    color: #172744;
 }
 
-.menu li {float: left; width: auto;}
-
-
-/* サイトヘッダー */
-.box1 {
-    background-color: #101e40;
-    padding: 12px 20px;
-    text-align: center;
-}
-
-/* ロゴ画像 */
-.site-logo {
+.box4 > aside {
     display: block;
     width: 100%;
-    max-width: 600px;
-    height: auto;
-    margin: 0 auto;
+    min-width: 0;
+    margin: 0;
 }
 
-/* ロゴのリンク */
-.site a {
-    display: block;
+/* サイドバーのリストが親の幅からはみ出さないようにする */
+.box4 ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-/* ===== Latest Journal：記事一覧 ===== */
-
-.box5 {
-    background-color: #f5f3ee;
-    padding: 48px 6%;
-    color: #172744;
+.box4 img {
+    max-width: 100%;
 }
 
-.box5 h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin: 0 0 28px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid #172744;
+/* ===== BOX3：メインビジュアル ===== */
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 480px;
+    padding: 48px;
+    box-sizing: border-box;
+
+    /* 写真を設定するまではネイビーで表示 */
+    background-color: #172744;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(15, 29, 53, 0.92),
+            rgba(15, 29, 53, 0.25)
+        ),
+        url("../images/hero-train.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
 }
 
-/* 記事カードを並べる */
-#article-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+.hero-content {
+    max-width: 540px;
 }
 
-/* 各記事カード */
-.article-card {
-    background-color: #ffffff;
-    padding: 24px;
-    border: 1px solid #e2ded5;
-    border-top: 4px solid #172744;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* マウスを乗せたとき */
-.article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 22px rgba(23, 39, 68, 0.10);
-}
-
-/* 国名 */
-.article-country {
-    color: #a64b38;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin: 0 0 12px;
-}
-
-/* 記事タイトル */
-.article-card h3 {
-    font-size: 19px;
-    line-height: 1.6;
-    margin: 0 0 12px;
-}
-
-.article-card h3 a {
-    color: #172744;
-    text-decoration: none;
-}
-
-.article-card h3 a:hover {
+.hero-label {
     color: #F2E2B8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
 }
 
-/* 日付 */
-.article-date {
-    color: #888888;
-    font-size: 12px;
-    margin-bottom: 16px;
+.hero h2 {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.5px;
+    margin: 0 0 20px;
 }
 
-/* 記事の説明 */
-.article-card p:last-child {
-    color: #555555;
+.hero-description {
+    color: #e5e8ee;
     font-size: 14px;
     line-height: 1.9;
-    margin-bottom: 0;
+    margin-bottom: 30px;
 }
 
-/* タブレット */
-@media (max-width: 900px) {
-    #article-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-    }
+.hero-button {
+    display: inline-block;
+    padding: 13px 22px;
+    border: 1px solid #F2E2B8;
+    color: #F2E2B8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
 }
 
-/* スマートフォン */
-@media (max-width: 600px) {
-    .box5 {
-        padding: 32px 18px;
-    }
-
-    .box5 h2 {
-        font-size: 20px;
-    }
-
-    #article-list {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .article-card {
-        padding: 20px;
-    }
-}
-
-/* サイドメニュー */
-.sidemenu ul{ margin: 0; padding: 0; list-style: none; }
-.sidemenu li a{ display: block; padding: 10px; color: #000000; font-size: 14px; text-decoration: none; }
-.sidemenu li a:hover{ background-color:#101e40; color: #fff; cursor: pointer; }
-
-
-
-/* Google Fonts：英字見出し用 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
-
-/* サイドバー */
-.box4 {
-    box-sizing: border-box;
-    width: 30%;
-    padding: 32px 24px;
-    background-color: #f5f3ee;
+.hero-button:hover {
+    background-color: #F2E2B8;
     color: #172744;
 }
 
-/* おすすめ記事の見出し */
+/* ===== 最新記事 ===== */
+
+#latest-article {
+    padding: 36px;
+    color: #172744;
+    overflow-wrap: anywhere;
+}
+
+#latest-article h1 {
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.5;
+}
+
+#latest-article .article-content {
+    font-size: 15px;
+    line-height: 2;
+}
+
+/* ===== サイドメニュー ===== */
+
 .sidemenu h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -302,7 +325,7 @@ body {
     position: relative;
 }
 
-/* 見出しの下に赤茶色のアクセント */
+/* 見出しの下のアクセント */
 .sidemenu h3::after {
     content: "";
     display: block;
@@ -314,7 +337,6 @@ body {
     background-color: #F2E2B8;
 }
 
-/* リスト */
 .sidemenu ul {
     list-style: none;
     margin: 0;
@@ -327,7 +349,6 @@ body {
     border-bottom: 1px solid #e2ded5;
 }
 
-/* リンク */
 .sidemenu li a {
     display: block;
     padding: 16px 8px;
@@ -339,26 +360,17 @@ body {
                 padding-left 0.2s ease;
 }
 
-/* マウスを乗せたとき */
 .sidemenu li a:hover {
+    background-color: #101e40;
     color: #F2E2B8;
     padding-left: 14px;
+    cursor: pointer;
 }
 
-/* スマートフォン */
-@media (max-width: 600px) {
-    .box4 {
-        width: 100%;
-        padding: 28px 20px;
-    }
-}
-
-
-/* ===== サイドバー共通 ===== */
+/* ===== サイドバー共通（おすすめ・人気記事） ===== */
 
 .osusume,
 .ranking {
-    box-sizing: border-box;
     width: 100%;
     margin-bottom: 36px;
 }
@@ -491,9 +503,188 @@ body {
     outline-offset: -2px;
 }
 
-/* ===== スマートフォン ===== */
+/* ===== Latest Journal：記事一覧 ===== */
 
+/* 記事一覧は2カラムの下に配置 */
+.box5 {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: #f5f3ee;
+    padding: 48px 6%;
+    color: #172744;
+}
+
+.box5 h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #172744;
+}
+
+/* 記事カードを並べる */
+#article-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* 各記事カード */
+.article-card {
+    background-color: #ffffff;
+    padding: 24px;
+    border: 1px solid #e2ded5;
+    border-top: 4px solid #172744;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(23, 39, 68, 0.10);
+}
+
+/* 国名 */
+.article-country {
+    color: #a64b38;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+
+/* 記事タイトル */
+.article-card h3 {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.article-card h3 a {
+    color: #172744;
+    text-decoration: none;
+}
+
+.article-card h3 a:hover {
+    color: #F2E2B8;
+}
+
+/* 日付 */
+.article-date {
+    color: #888888;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+/* 記事の説明 */
+.article-card p:last-child {
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 0;
+}
+
+/* ===== SNS共有ボタン ===== */
+
+.share {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.share ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.share li a {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-align: center;
+    background: #000000;
+    color: #F2E2B8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+}
+
+.share li a:hover {
+    opacity: 0.8;
+    background: #A64B38;
+    color: #fff;
+}
+
+/* 丸型のシェアボタン */
+.share .share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: opacity 0.2s ease;
+}
+
+.share .share-X {
+    background-color: #000;
+}
+
+.share .share-fb {
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.share .share-line {
+    background-color: #06c755;
+    color: #fff;
+}
+
+.share .share-button:hover {
+    opacity: 0.75;
+}
+
+/* ===== フッター ===== */
+
+footer {
+    padding: 24px;
+    text-align: center;
+}
+
+/*copyright*/
+.copyright p {
+    margin: 0;
+    color: #F2E2B8;
+    font-size: 14px;
+}
+
+/* ===== レスポンシブ ===== */
+
+/* タブレット */
+@media (max-width: 900px) {
+    #article-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* スマートフォン */
 @media (max-width: 600px) {
+    .hero {
+        min-height: 380px;
+        padding: 28px;
+    }
+
     .osusume li a {
         height: 180px;
     }
@@ -503,103 +694,55 @@ body {
         width: 100px;
         height: 72px;
     }
+
+    .box5 {
+        padding: 32px 18px;
+    }
+
+    .box5 h2 {
+        font-size: 20px;
+    }
+
+    #article-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .article-card {
+        padding: 20px;
+    }
 }
 
+/* タブレット・スマートフォン：1カラムにする */
+@media (max-width: 800px) {
+    .boxA {
+        grid-template-columns: minmax(0, 1fr);
+    }
 
-/* ===== BOX3：メインビジュアル ===== */
-
-.box3 {
-    width: 70%;
-    min-width: 0;
-    box-sizing: border-box;
-    background-color: #d3d3d3;
-}
-
-.hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 480px;
-    padding: 48px;
-    box-sizing: border-box;
-
-    /* 写真を設定するまではネイビーで表示 */
-    background-color: #172744;
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(15, 29, 53, 0.92),
-            rgba(15, 29, 53, 0.25)
-        ),
-        url("../images/hero-train.jpg");
-    background-size: cover;
-    background-position: center;
-    color: #ffffff;
-}
-
-.hero-content {
-    max-width: 540px;
-}
-
-.hero-label {
-    color: #F2E2B8;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    margin-bottom: 22px;
-}
-
-.hero h2 {
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(30px, 3.5vw, 48px);
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: 0.5px;
-    margin: 0 0 20px;
-}
-
-.hero-description {
-    color: #e5e8ee;
-    font-size: 14px;
-    line-height: 1.9;
-    margin-bottom: 30px;
-}
-
-.hero-button {
-    display: inline-block;
-    padding: 13px 22px;
-    border: 1px solid #F2E2B8;
-    color: #F2E2B8;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-decoration: none;
-    transition: background-color 0.2s ease,
-                color 0.2s ease;
-}
-
-.hero-button:hover {
-    background-color: #F2E2B8;
-    color: #172744;
-}
-
-/* スマートフォン */
-@media (max-width: 600px) {
-    .box3 {
+    .box3,
+    .box4,
+    .box5 {
+        grid-column: 1;
+        grid-row: auto;
         width: 100%;
     }
 
-    .hero {
-        min-height: 380px;
-        padding: 28px;
+    .box4 {
+        padding: 24px 20px;
     }
-}
 
-/*copyright*/
-.copyright p {margin:0;
-              color: #F2E2B8;
-              font-size: :14px;
+    #latest-article {
+        padding: 24px 20px;
+    }
+
+    .login-button {
+        top: 10px;
+        right: 10px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .box1 {
+        padding: 60px 16px 20px;
+    }
 }

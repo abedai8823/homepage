@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事編集 | rail explorer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 24px;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .admin-container h1 {
+      color: #172744;
+      margin-bottom: 24px;
+    }
+
+    .admin-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .admin-form label {
+      display: grid;
+      gap: 8px;
+      font-weight: bold;
+      color: #172744;
+    }
+
+    .admin-form input,
+    .admin-form textarea,
+    .admin-form select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font: inherit;
+    }
+
+    .admin-form textarea {
+      min-height: 260px;
+      resize: vertical;
+    }
+
+    .admin-button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      background: #172744;
+      color: #F2E2B8;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .admin-button:hover {
+      background: #A64B38;
+    }
+
+    #admin-message {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .admin-top-link {
+      color: #172744;
+    }
+  </style>
+</head>
+<body>
+  <main class="admin-container">
+    <p><a class="admin-top-link" href="index.html">← サイトに戻る</a></p>
+
+    <h1>記事編集</h1>
+    <p id="admin-user">ログイン状態を確認しています...</p>
+
+    <form id="article-form" class="admin-form" hidden>
+      <label>
+        記事タイトル
+        <input type="text" id="title" required maxlength="150"
+               placeholder="例：北海道のローカル線を巡る旅">
+      </label>
+
+      <label>
+        国・地域
+        <input type="text" id="country" required maxlength="100"
+               placeholder="例：日本・北海道">
+      </label>
+
+      <label>
+        投稿日
+        <input type="date" id="date" required>
+      </label>
+
+      <label>
+        記事の紹介文
+        <textarea id="description" rows="3" maxlength="500"
+                  placeholder="記事一覧に表示する短い紹介文"></textarea>
+      </label>
+
+    <label>
+  記事本文
+  <textarea id="content" required
+            placeholder="ここに旅行記や鉄道撮影記を書こう"></textarea>
+</label>
+
+
+<div class="photo-section">
+  <h2>記事の写真</h2>
+  <p>写真のURLを入力すると、プレビューを確認できます。</p>
+
+  <div id="photo-list">
+    <div class="photo-item">
+      <label>
+        写真1のURL
+        <input
+          type="url"
+          class="photo-url"
+          placeholder="https://example.com/photo1.jpg"
+        >
+      </label>
+      <div class="photo-preview-container" hidden>
+        <img
+          class="photo-preview"
+          alt="写真プレビュー"
+          style="max-width: 100%; max-height: 300px;"
+        >
+      </div>
+      <button type="button" class="remove-photo">
+        この写真を削除
+      </button>
+    </div>
+  </div>
+
+  <button type="button" id="add-photo-button">
+    ＋ 写真を追加
+  </button>
+</div>
+
+
+      <label>
+        公開設定
+        <select id="status">
+          <option value="draft">下書き（自分だけが確認）</option>
+          <option value="published">公開する</option>
+        </select>
+      </label>
+
+      <button class="admin-button" type="submit" id="save-button">
+        記事を保存
+      </button>
+    </form>
+
+    <p id="admin-message" role="status"></p>
+  </main>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

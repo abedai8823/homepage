@@ -1,77 +1,162 @@
-// rail explorer のサンプル記事
 
-const articles = [
-    {
-        title: "スリランカの鉄道旅",
-        country: "Sri Lanka",
-        date: "2026-10-24",
-        description: "美しい海岸線を走る列車の旅を記録。",
-        content: `
-            <h2>インド洋沿いを走る列車</h2>
-            <p>スリランカの鉄道旅が始まる。車窓からは美しいインド洋が見え、列車は海岸線に沿って走っていく。</p>
+import { db } from "./firebase.js";
+import {
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-            <h2>現地の駅を訪ねて</h2>
-            <p>駅ごとに異なる雰囲気があり、現地の人々の暮らしや鉄道文化を感じることができる。</p>
-
-            <p>これから訪れた場所や乗車した列車について、写真とともに詳しく記録していく。</p>
-        `,
-        url: "#"
-    },
-    {
-        title: "タンザニアの鉄道を訪ねて",
-        country: "Tanzania",
-        date: "2026-10-20",
-        description: "アフリカの鉄道風景と現地での体験。",
-        content: `
-            <h2>アフリカの鉄道風景</h2>
-            <p>タンザニアの鉄道と、旅の中で出会った風景を記録する。</p>
-        `,
-        url: "#"
-    },
-    {
-        title: "ヨーロッパ鉄道の記録",
-        country: "Europe",
-        date: "2026-10-15",
-        description: "ヨーロッパで出会った鉄道を紹介。",
-        content: `
-            <h2>ヨーロッパの鉄道を巡る</h2>
-            <p>ヨーロッパで出会った列車や駅の風景を紹介する。</p>
-        `,
-        url: "#"
-    }
-];
-
-
-// 日付の新しい順に並べる
-articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-// BOX5の記事一覧に表示する
-const articleList = document.getElementById("article-list");
-
-if (articleList) {
-    articleList.innerHTML = articles.map(article => `
-        <article class="article-card">
-            <p class="article-country">${article.country}</p>
-            <h3><a href="${article.url}">${article.title}</a></h3>
-            <p class="article-date">${article.date}</p>
-            <p>${article.description}</p>
-        </article>
-    `).join("");
+// HTMLに文字列を安全に表示する
+function escapeHTML(value = "") {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
 }
 
-// BOX3に最新記事の全文を表示する
-const latestArticle = document.getElementById("latest-article");
+// 公開済みの記事をFirestoreから取得する
+async function loadArticles() {
+  const articleList = document.getElementById("article-list");
+  const latestArticle = document.getElementById("latest-article");
+const pickupList = document.getElementById("pickup-list");
+  try {
+    const articlesQuery = query(
+      collection(db, "articles"),
+      where("status", "==", "published")
+    );
 
-if (latestArticle && articles.length > 0) {
-    const latest = articles[0];
+    const snapshot = await getDocs(articlesQuery);
 
-    latestArticle.innerHTML = `
-        <p class="article-country">${latest.country}</p>
-        <h1>${latest.title}</h1>
-        <p class="article-date">${latest.date}</p>
-        <p class="article-description">${latest.description}</p>
-        <div class="article-content">
-            ${latest.content}
-        </div>
-    `;
+    const articles = snapshot.docs
+      .map((document) => ({
+        id: document.id,
+        ...document.data()
+      }))
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+
+    // 公開記事がない場合
+    if (articles.length === 0) {
+      if (articleList) {
+        articleList.innerHTML =
+          '<p>公開中の記事はまだありません。</p>';
+      }
+
+      if (latestArticle) {
+        latestArticle.innerHTML =
+          '<p>新しい記事を準備中です。</p>';
+      }
+
+      console.log("公開済みの記事はまだありません。");
+      return;
+    }
+
+    // BOX5：記事一覧
+    // サイドバー：Pick up
+if (pickupList) {
+  pickupList.innerHTML = articles.slice(0, 5).map((article) => `
+    <li>
+      <a href="#article-${encodeURIComponent(article.id)}">
+        ${escapeHTML(article.title || "無題の記事")}
+      </a>
+    </li>
+  `).join("");
+}
+    if (articleList) {
+      articleList.innerHTML = articles.map((article) => `
+        <article class="article-card">
+          <p class="article-country">
+            ${escapeHTML(article.country || "")}
+          </p>
+          <h3>
+            <a href="#article-${encodeURIComponent(article.id)}">
+              ${escapeHTML(article.title || "無題の記事")}
+            </a>
+          </h3>
+          <p class="article-date">${escapeHTML(article.date || "")}</p>
+          <p>${escapeHTML(article.description || "")}</p>
+        </article>
+      `).join("");
+    }
+
+    // BOX3：最新記事
+    if (latestArticle) {
+      const latest = articles[0];
+
+      latestArticle.innerHTML = `
+        <p class="article-country">
+          ${escapeHTML(latest.country || "")}
+        </p>
+        <h1>${escapeHTML(latest.title || "無題の記事")}</h1>
+        <p class="article-date">${escapeHTML(latest.date || "")}</p>
+        <p class="article-description">
+          ${escapeHTML(latest.description || "")}
+        </p>
+        <div class="article-content"></div>
+      `;
+
+      // 本文は文字列として表示し、HTMLを実行させない
+      const contentArea = latestArticle.querySelector(".article-content");
+      contentArea.textContent = latest.content || "本文はまだありません。";
+      contentArea.style.whiteSpace = "pre-wrap";
+    }
+
+    console.log(`Firestoreから公開記事を${articles.length}件読み込みました。`);
+
+  } catch (error) {
+    console.error("記事の読み込みエラー:", error);
+
+    if (articleList) {
+      articleList.textContent =
+        "記事を読み込めませんでした。時間をおいて再度お試しください。";
+    }
+
+    if (latestArticle) {
+      latestArticle.textContent = "記事の読み込みに失敗しました。";
+    }
+  }
+}
+
+loadArticles();
+
+
+
+
+function shareOnX() {
+  const url = window.location.href;
+  const title = document.title;
+
+  const shareUrl =
+    "https://twitter.com/intent/tweet?url=" +
+    encodeURIComponent(url) +
+    "&text=" +
+    encodeURIComponent(title);
+
+  window.open(shareUrl, "_blank", "noopener,noreferrer");
+}
+
+function shareOnFacebook() {
+  const url = window.location.href;
+
+  const shareUrl =
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(url);
+
+  window.open(shareUrl, "_blank", "noopener,noreferrer");
+}
+
+function shareOnLINE() {
+  const url = window.location.href;
+  const title = document.title;
+
+  const shareUrl =
+    "https://social-plugins.line.me/lineit/share?url=" +
+    encodeURIComponent(url) +
+    "&text=" +
+    encodeURIComponent(title);
+
+  window.open(shareUrl, "_blank", "noopener,noreferrer");
 }
